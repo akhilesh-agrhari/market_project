@@ -6,24 +6,21 @@ void user(string username, char password[])
 	int i,flag=0;
 	ifstream userinfofile;
 	userinfofile.open("alluser.txt", ios::binary);
-	for(i=0;!userinfofile.eof();i++)
+	i=0;
+	while(userinfofile)
 	{
+		
 		userinfofile.read((char *)&userinfo_obj,sizeof(userinfo_obj));      //readfile.read((char *)&get,sizeof(get));
 		if(userinfo_obj.username==username)
 		{
-			system("cls");
-			cout<<"username found";
-			getch();
 			flag=1;
 			break;
 		}
+		i++;
 	}
 	userinfofile.close();
 	if(flag==1 && strcmp(password,userinfo_obj.password)==0)
 	{
-		system("cls");
-		cout<<"password matched";
-		getch();
 		purchase(userinfo_obj);
 	}
 	else
@@ -40,23 +37,32 @@ void user(string username, char password[])
 void purchase(userinfo userin)
 {
 	char ch;
-	item allitems[100];
+	item allitems[25];
 	ifstream fileitem;
-	fileitem.open("item.txt");
-	int i;
-	for(i=0;!fileitem.eof();i++);
+	fileitem.open("item.txt",ios::binary | ios::in );
+	int i=0;
+	fileitem.seekg(ios::beg);
+	while(fileitem)
 	{
 		fileitem.read((char *)&allitems[i],sizeof(allitems[i])); //file.read((char *)&obj, sizeof(obj));
+	i++;
 	}
+	int j=i;
+	/*for(i=0;i<j;i++)
+	{
+		cout<<allitems[i].productid<<"\t"<<allitems[i].proname<<"\t"<<allitems[i].price<<endl;
+	}
+	getch();*/
 	
 	system("cls");
 		system("color fc");
 		gotoxy(32,6);
-		cout<<"Purchase Order";
+		cout<<"Logged in "<<userin.username;
+		
 		gotoxy(32,8);
 		cout<<"______________";
 		gotoxy(32,8);
-		cout<<"Logged in "<<userin.username;
+		cout<<"Purchase Order";
 		
 	
 		gotoxy(22,11);

@@ -33,7 +33,7 @@ char login()
 		system("color E1");
 		char pass[5],matc[5]="1234";
 		matc[4]='\0';
-		gotoxy(30,16);
+		gotoxy(30,17);
 		printf("Password : ");
 		gets(pass);             //Entering password
 		gotoxy(30,17);
@@ -70,7 +70,7 @@ char login()
 		cout<<"Enter username : ";
 		cin>>username;
 		gotoxy(28,10);
-		cout<<"Password";
+		cout<<"Password : ";
 		cin>>password;
 		user(username,password);
 		return '4';               //login as user going to main function.

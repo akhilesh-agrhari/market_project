@@ -20,9 +20,9 @@ void admin()
 	printf("3-Remove items");
 	gotoxy(30,12);
 	printf("4-logout");
-	gotoxy(30,12);
+	gotoxy(30,13);
 	printf("Enter numeric value : ");
-	gotoxy(52,12);
+	gotoxy(52,13);
 	task=getch();
 	if(task=='4')
 	{
@@ -101,7 +101,7 @@ void view()
 	cout<<"Product ID"<<"\t\t"<<"Name"<<"\t\t"<<"Available"<<"\t\t"<<"Rate"<<endl;
 	ifstream readfile;
 	readfile.open("item.txt",ios::binary | ios::in);
-	while(!(readfile.eof()))
+	while(readfile)
 	{
 		
 		readfile.read((char *)&get,sizeof(get));    //file.read((char *)&obj, sizeof(obj));
