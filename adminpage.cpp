@@ -1,6 +1,5 @@
 using namespace std;
 void add(ofstream & );
-//void view(ifstream &);
 
 class item;
 void remove(int ,fstream & );
@@ -119,7 +118,7 @@ void remove(int i, fstream &delcon)
 		delcon.read((char *)&get,sizeof(get));    //file.read((char *)&obj, sizeof(obj));
 		if(get.productid==i)
 		{
-			
+			                                   //incomplete
 		}
 	}
 	

@@ -48,13 +48,8 @@ void purchase(userinfo userin)
 	i++;
 	}
 	int j=i;
-	/*for(i=0;i<j;i++)
-	{
-		cout<<allitems[i].productid<<"\t"<<allitems[i].proname<<"\t"<<allitems[i].price<<endl;
-	}
-	getch();*/
 	
-	system("cls");
+	useragain : system("cls");
 		system("color fc");
 		gotoxy(32,6);
 		cout<<"Logged in "<<userin.username;
@@ -80,71 +75,43 @@ void purchase(userinfo userin)
 		gotoxy(22,19);
 		cout<<"Select an option by typing the numeric code: ";
 		ch=getch();
-		while(1){
-		switch(ch)
+		if(ch=='1')
 		{
-			case('1'):
-				{
-					//view();     //view the items
-					break;
-				}
-			case('2'):
-				{
-					//r.get_data();          //create order
-					//flag='t';
-					break;
-				}
-			case('3'):                  //display order
-				{
-				/*	if(flag=='f')
-					{
-						gotoxy(22,20);
-						cout<<"Order details not yet entered!";
-						gotoxy(22,21);
-						cout<<"Press any key to continue..";	
-						getch();
-					}
-					else
-					r.display();*/
-					break;
-				}
-			case('4'):                //generate PO	
-				{/*	if(flag=='f')
-					{
-						gotoxy(22,20);
-						cout<<"Order details not yet entered!";
-						gotoxy(22,21);
-						cout<<"Press any key to continue..";	
-					}
-					else
-					{
-						po p;
-						generate(r,p);
-						system("cls");
-						generate2(r,p);
-					}
-					getch();*/
-					break;
-				}
-				
-			case('5'):
-				{
-				//	add_items();
-					break;
-				}
-			case('6'):
-				{
-					return;
-				}
-			default:
-				{
-					gotoxy(22,8);
-					system("cls");
-					cout<<"Invalid Choice! YOU are logged out";
-					getch();
-					return;
-				}
+			//displaying available items in the store
+			system("cls");
+			cout<<"ID\t\t"<<"Name\t\t"<<"Price"<<endl;;
+			for(i=0;i<j-1;i++)
+			{
+				cout<<allitems[i].productid<<"\t\t"<<allitems[i].proname<<"\t\t"<<allitems[i].price<<endl;
 			}
+			cout<<"Press any key to go back";
+			getch();
 		}
+		else if(ch=='2')
+		{
+			//create new order .............INCOMPLETE
+		}
+		else if(ch='3')
+		{
+			//display order detail ................INCOMPLETE
+		}
+		else if(ch=='4')
+		{
+			//Generate PO ..........................INCOMPLETE
+		}
+		else if(ch=='5')
+		{
+			//add items to the cart.................INCOMPLETE
+		}
+		else if(ch=='6')
+		{
+			//logout
+			return;
+		}
+		else
+		{
+			goto useragain;
+		}
+		goto useragain;
 	
 }

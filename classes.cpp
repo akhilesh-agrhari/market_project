@@ -40,15 +40,7 @@ class userinfo
 	public:
 		char username[10];
 		char password[8];
-//	void setuser();
 };
-/*void users::setuser()
-{
-	username[]="hello";
-	username[5]='\0';
-	password[]="null"
-	password[4]='\0';
-}*/
 
 
 

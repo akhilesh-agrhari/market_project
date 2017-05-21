@@ -26,7 +26,7 @@ char login()
 	loginas=getch();
 	if(loginas=='4')
 	{
-		exit(1);                //shut the program
+		return '5';                //shutdown the program
 	}
 	else if(loginas=='2')      //login as admin
 	{
