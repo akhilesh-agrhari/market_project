@@ -120,6 +120,5 @@ void remove(int i, fstream &delcon)
 		{
 			                                   //incomplete
 		}
-	}
-	
+	}	
 }

@@ -37,6 +37,7 @@ void user(string username, char password[])
 void purchase(userinfo userin)
 {
 	char ch;
+	order odr ;
 	item allitems[25];
 	ifstream fileitem;
 	fileitem.open("item.txt",ios::binary | ios::in );
@@ -47,7 +48,7 @@ void purchase(userinfo userin)
 		fileitem.read((char *)&allitems[i],sizeof(allitems[i])); //file.read((char *)&obj, sizeof(obj));
 	i++;
 	}
-	int j=i;
+	int j=i-1;
 	
 	useragain : system("cls");
 		system("color fc");
@@ -80,7 +81,7 @@ void purchase(userinfo userin)
 			//displaying available items in the store
 			system("cls");
 			cout<<"ID\t\t"<<"Name\t\t"<<"Price"<<endl;;
-			for(i=0;i<j-1;i++)
+			for(i=0;i<j;i++)
 			{
 				cout<<allitems[i].productid<<"\t\t"<<allitems[i].proname<<"\t\t"<<allitems[i].price<<endl;
 			}
@@ -90,10 +91,34 @@ void purchase(userinfo userin)
 		else if(ch=='2')
 		{
 			//create new order .............INCOMPLETE
+				system("cls");
+				ofstream orderin("order.txt", ios::trunc |ios::binary);
+			int i,bill=0;
+			char choice;
+			do
+			{
+				int flag,temp;
+				flag = odr.createoreder(allitems,j);
+				if(flag==1) {
+				orderin.write((char *)&odr, sizeof(odr));
+				temp=calbill(odr);
+				bill=bill+ temp;
+				cout<<endl<<"bill so far : "<<bill;
+				}	//f.write((char*)&arts[i],sizeof(arts[i])); 
+				cout<<endl<<"Purchase one more item ? y/n : ";
+				choice=getch();
+			}while(choice=='y');
+			orderin.close();
 		}
 		else if(ch='3')
 		{
-			//display order detail ................INCOMPLETE
+			/*//display order detail ................INCOMPLETE
+			system("cls");
+			ifstream orderout("order.txt");
+			while(orderout)
+			{
+				orderout.read()
+			}*/
 		}
 		else if(ch=='4')
 		{

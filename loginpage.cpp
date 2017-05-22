@@ -59,7 +59,7 @@ char login()
 		}
 		
 	}
-	else if(loginas=='1')
+	else if(loginas=='1') 
 	{
 		string username;
 		char password[8];
@@ -111,6 +111,5 @@ void signup()
 	reg_user.open("alluser.txt",ios::binary | ios::app);
 		reg_user.write((char *)&inuser, sizeof(inuser));       //file.write((char *)&obj, sizeof(obj));
 	reg_user.close();
-	return;
-	
+	return;	
 }

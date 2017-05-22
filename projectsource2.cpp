@@ -15,7 +15,7 @@ using namespace std;
 
 //Main Function
 int main()
-{   //font size increase
+{   //font size and style increase
 	CONSOLE_FONT_INFOEX cfi;
 cfi.cbSize = sizeof(cfi);
 cfi.nFont = 0;
@@ -35,6 +35,3 @@ SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 	}
 	return 0;
 }
-
-
-

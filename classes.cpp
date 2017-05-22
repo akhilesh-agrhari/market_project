@@ -1,4 +1,6 @@
 using namespace std;
+class order;
+int calbill(order);
 void view();
 int access();
 void signup();
@@ -41,6 +43,60 @@ class userinfo
 		char username[10];
 		char password[8];
 };
+class order
+{
+	private:
+		int id;
+		char name[10];
+		int price;
+		int quantity;
+	public:
+		int createoreder(item [],int);
+		friend calbill(order);
+		
+};
+int order::createoreder(item allitems[], int j)
+{	int i,found=0;
+	cout<<endl<<"Product id : ";
+	cin>>id;    //id intialized
+	for(i=0;i<j;i++)
+	{
+		if(allitems[i].productid==id)
+		{
+		found=1;
+		break;
+		}
+	}
+	if(found==1)
+	{
+		cout<<"Product name : "<<allitems[i].proname<<endl;
+		cout<<"price :"<<allitems[i].price<<endl;
+		strcpy(name,allitems[i].proname);   //proname intialized
+		price=allitems[i].price;        //price intialized
+	}
+	else{
+	
+	cout<<"Wrong product id"<<endl;
+	return 0;
+	}
+	cout<<"Quantity : ";
+	cin>>quantity;                 //quantity intialized
+	if(quantity>allitems[i].stock)
+	{
+		cout<<"Only "<<allitems[i].stock<<" items are left in the stock"<<endl;
+		return 0;
+	}
+	else{
+		int confirm;
+		cout<<"confirm add item to the cart ? y/n : ";
+		confirm=getch();
+		if(confirm=='y')
+		return 1;
+		else
+		return 0;
+	}
+}
 
-
-
+int calbill(order odr){
+	return ((odr.quantity)*(odr.price));
+}
