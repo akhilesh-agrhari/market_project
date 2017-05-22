@@ -52,9 +52,11 @@ class order
 		int quantity;
 	public:
 		int createoreder(item [],int);
+		void showdata();
 		friend calbill(order);
 		
 };
+
 int order::createoreder(item allitems[], int j)
 {	int i,found=0;
 	cout<<endl<<"Product id : ";
@@ -95,6 +97,11 @@ int order::createoreder(item allitems[], int j)
 		else
 		return 0;
 	}
+}
+
+void order::showdata()
+{
+	cout<<id<<"\t"<<name<<"\t"<<price<<"\t"<<quantity<<"\t\t"<< price*quantity<<endl;
 }
 
 int calbill(order odr){

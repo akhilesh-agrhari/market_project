@@ -90,7 +90,7 @@ void add(ofstream &outfile)
 {
 	item get;           //object of item file
 	get.getdata();     //inputing data
-	outfile.write((char *)&get,sizeof(get)); //f.write((char*)&arts[i],sizeof(arts[i])); writing data into the file
+	outfile.write((char *)&get,0); //f.write((char*)&arts[i],sizeof(arts[i])); writing data into the file
 }
 
 void view()

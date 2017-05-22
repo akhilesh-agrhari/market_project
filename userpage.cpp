@@ -36,6 +36,7 @@ void user(string username, char password[])
 
 void purchase(userinfo userin)
 {
+	int bill=0;
 	char ch;
 	order odr ;
 	item allitems[25];
@@ -43,6 +44,8 @@ void purchase(userinfo userin)
 	fileitem.open("item.txt",ios::binary | ios::in );
 	int i=0;
 	fileitem.seekg(ios::beg);
+	ofstream orderin("order.txt", ios::trunc |ios::binary);
+	orderin.close();
 	while(fileitem)
 	{
 		fileitem.read((char *)&allitems[i],sizeof(allitems[i])); //file.read((char *)&obj, sizeof(obj));
@@ -93,32 +96,39 @@ void purchase(userinfo userin)
 			//create new order .............INCOMPLETE
 				system("cls");
 				ofstream orderin("order.txt", ios::trunc |ios::binary);
-			int i,bill=0;
+			int i;
 			char choice;
 			do
 			{
 				int flag,temp;
 				flag = odr.createoreder(allitems,j);
 				if(flag==1) {
-				orderin.write((char *)&odr, sizeof(odr));
+				orderin.write((char *)&odr, 0); //f.write((char*)&arts[i],sizeof(arts[i])); 
 				temp=calbill(odr);
 				bill=bill+ temp;
 				cout<<endl<<"bill so far : "<<bill;
-				}	//f.write((char*)&arts[i],sizeof(arts[i])); 
-				cout<<endl<<"Purchase one more item ? y/n : ";
+				}	
+				cout<<endl<<endl<<"Purchase one more item ? y/n : ";
 				choice=getch();
 			}while(choice=='y');
 			orderin.close();
 		}
-		else if(ch='3')
+		else if(ch=='3')
 		{
-			/*//display order detail ................INCOMPLETE
+			//display order detail ................
 			system("cls");
 			ifstream orderout("order.txt");
+			cout<<"ID\t"<<"Name\t"<<"Price\t"<<"Quantity\t"<<"Cost"<<endl;
 			while(orderout)
 			{
-				orderout.read()
-			}*/
+				orderout.read((char *)&odr, sizeof(odr));
+				odr.showdata();
+			}
+			orderout.close();
+			cout<<"----------------------------------------------"<<endl;
+			cout<<"Total\t\t\t\t\t"<<bill<<endl<<endl;
+			cout<<"Press any key to go back ";
+			getch();
 		}
 		else if(ch=='4')
 		{

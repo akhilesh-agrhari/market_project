@@ -27,7 +27,6 @@ std::wcscpy(cfi.FaceName, L"Consolas"); // Choose your font
 SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 
 	char flag='f',log;
-	char ch;
 	restart: log=login();         //login page
 	while(log=='4')
 	{
