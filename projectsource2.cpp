@@ -5,6 +5,7 @@
 #include<fstream>
 #include<ctime>
 #include<windows.h>
+#include<algorithm>
 #include"gotoxy.cpp"
 #include"classes.cpp"
 #include"loginpage.cpp"
@@ -32,5 +33,8 @@ SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 	{
 		log=login();
 	}
+	system("cls");
+	gotoxy(30,9);
+	cout<<" THANK YOU ! "<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
 	return 0;
 }

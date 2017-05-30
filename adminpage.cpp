@@ -1,12 +1,13 @@
 using namespace std;
-void add(ofstream & );
+void add();
 
 class item;
-void remove(int ,fstream & );
+int remove(item [],int [],int ,int);
 void admin()
 {
 	char task;
-	admin:system("cls");
+	do{
+	system("cls");
 	gotoxy(30,6);
 	printf("ADMINISTRATOR");
 	gotoxy(28,7);
@@ -31,22 +32,52 @@ void admin()
 	else if(task=='3')
 	{
 		//remove item from the item file
-		int i;
+		int i=0,j,del[10],countdel=0;
 		char choice;
+		item *allitems = new item[100];
+		ifstream itemin("item.txt");
+		while(itemin.peek()!=EOF)
+		{
+			itemin.read((char *)&allitems[i],sizeof(allitems[i]));
+			i++;
+		}
+		itemin.close();
+		j=i;
 		fstream delcon;
 		delcon.open("item.txt");
 		do{
 		system("cls");
 		gotoxy(30,6);
 		cout<<"~~REMOVE~~";
-		gotoxy(28,7);
+		gotoxy(22,7);
 		cout<<"Enter product id which you wants to delete : ";
 		cin>>i;
-		remove(i,delcon);
+		int find,flag=0;
+		for(find=0;find<j;find++)
+		{
+			if(i==allitems[find].productid)
+			{
+				flag=1;
+			}
+		}
+		if(flag==1)
+		{
+			del[countdel]=i;
+			countdel++;
 		gotoxy(28,9);
 		cout<<"Remove one more item y/n : ";
 		choice=getch();
+		}
+		else
+		{
+			gotoxy(28,9);
+			cout<<"INVALID Product ID ";
+			gotoxy(28,10);
+			cout<<"Remove another ? y/n :  ";
+			choice=getch();
+		}
 		}while(choice=='y');
+		remove(allitems,del,countdel,j);
 	}
 	else if(task=='2')
 	{
@@ -54,26 +85,24 @@ void admin()
 		char choice;
 		view();
 		getch();
-		goto admin;
 	}
 	else if(task=='1')
 	{
 		//add item to the item file
 		char choice;
-		ofstream outfile;
-		outfile.open("item.txt",ios::app | ios::out | ios::binary);
+		/*ofstream outfile;
+		outfile.open("item.txt",ios::app | ios::out | ios::binary);*/
 		do
 		{
 			system("cls");
 			gotoxy(28,7);
 			cout<<"~~Add new product into the data base~~";
 			gotoxy(30,8);
-			add(outfile);
+			add();
 			gotoxy(30,13);
 			cout<<"Add more items in the shop y/n :";
 			choice=getch();
 		}while(choice=='y');
-		outfile.close();
 	}
 	else
 	{
@@ -85,22 +114,26 @@ void admin()
 		getch();
 		return;
 	}
+}while(1);
 }
-void add(ofstream &outfile)
+void add()
 {
 	item get;           //object of item file
 	get.getdata();     //inputing data
-	outfile.write((char *)&get,0); //f.write((char*)&arts[i],sizeof(arts[i])); writing data into the file
+	ofstream outfile;
+	outfile.open("item.txt",ios::app | ios::out | ios::binary);
+	outfile.write((char *)&get,sizeof(get)); //f.write((char*)&arts[i],sizeof(arts[i])); writing data into the file
+	outfile.close();
 }
 
 void view()
 {
 	item get;
 	system("cls");
-	cout<<"Product ID"<<"\t\t"<<"Name"<<"\t\t"<<"Available"<<"\t\t"<<"Rate"<<endl;
+	cout<<"ID"<<"\t"<<setw(10)<<"Name"<<"\t"<<setw(9)<<"Available"<<"\t"<<"Rate"<<endl;
 	ifstream readfile;
 	readfile.open("item.txt",ios::binary | ios::in);
-	while(readfile)
+	while(readfile.peek()!=EOF)
 	{
 		
 		readfile.read((char *)&get,sizeof(get));    //file.read((char *)&obj, sizeof(obj));
@@ -110,15 +143,28 @@ void view()
 	readfile.close();
 	return;
 }
-void remove(int i, fstream &delcon)
+int remove(item allitems[],int del[],int countdel, int lenallitems)
 {
-	item get;
-	while(!delcon.eof())
+	int i=0,j;
+	int flag=1;
+	sort(del,del + countdel);
+	ofstream itemout("item.txt", ios::trunc);
+	while(i<lenallitems)
 	{
-		delcon.read((char *)&get,sizeof(get));    //file.read((char *)&obj, sizeof(obj));
-		if(get.productid==i)
+		for(j=0;(j<countdel) && (flag==1) ;j++)     //to check whethere the product code is in del[] or not
 		{
-			                                   //incomplete
+		
+			if(allitems[i].productid==del[j])     // yes.... it means item should not written in the file
+			{
+			flag=0;
+			}
 		}
-	}	
+		if(flag==1)                      // yes ..... it means item is not in del[]....and data should be written into the file
+		{
+			itemout.write((char *)&allitems[i], sizeof(allitems[i]));
+		}
+		i++;
+		flag=1;
+	}
+	itemout.close();
 }
